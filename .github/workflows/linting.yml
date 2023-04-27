@@ -1,0 +1,55 @@
+name: Linting
+
+on:
+  push:
+    branches:
+      - develop
+
+  pull_request:
+    branches:
+      - develop
+
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: 16.x # ---------- the version of node.js to use
+
+jobs:
+  lint-source-code:
+    name: Lint source code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Base-64 encode PAT
+        id: base-64-encode-pat
+        run: |
+          node -e "b64=Buffer.from('${{ secrets.AZURE_DEVOPS_ARTIFACTS_PAT }}').toString('base64');console.log(b64);" > auth.txt
+          echo "BASE64_ENCODED_PERSONAL_ACCESS_TOKEN=$(cat auth.txt)" >> $GITHUB_ENV
+
+      - name: Authorize npm
+        env:
+          ARTIFACTS_NPM_ROOT: //pkgs.dev.azure.com/Companycode/_packaging/CompanyVsts/npm
+          EMAIL_ADDRESS: required-but-not-used@example.com
+          USER_NAME: Companycode
+        run: |
+          echo "${{ env.ARTIFACTS_NPM_ROOT }}/registry/:username=${{ env.USER_NAME }}"                             >> .npmrc
+          echo "${{ env.ARTIFACTS_NPM_ROOT }}/registry/:_password=${{ env.BASE64_ENCODED_PERSONAL_ACCESS_TOKEN }}" >> .npmrc
+          echo "${{ env.ARTIFACTS_NPM_ROOT }}/registry/:email=${{ env.EMAIL_ADDRESS }}"                            >> .npmrc
+          echo "${{ env.ARTIFACTS_NPM_ROOT }}/:username=${{ env.USER_NAME }}"                                      >> .npmrc
+          echo "${{ env.ARTIFACTS_NPM_ROOT }}/:_password=${{ env.BASE64_ENCODED_PERSONAL_ACCESS_TOKEN }}"          >> .npmrc
+          echo "${{ env.ARTIFACTS_NPM_ROOT }}/:email=${{ env.EMAIL_ADDRESS}}"                                      >> .npmrc
+          echo "@fortawesome:registry=https://npm.fontawesome.com/"                                                >> .npmrc
+          echo "//npm.fontawesome.com/:_authToken=${{ secrets.FONT_AWESOME_PKG_MGR_TOKEN }}"                       >> .npmrc
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint the source code
+        run: npm run lint

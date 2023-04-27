@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppLoader renders correct layout 1`] = `
+<div
+  className="msal-error"
+>
+  <p>
+    An authentication error occurred:
+  </p>
+  <pre>
+    {
+  "property1": 12345,
+  "property2": "This is a mock message for the snapshot tests."
+}
+  </pre>
+</div>
+`;

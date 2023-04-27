@@ -1,0 +1,30 @@
+@import '~@Company/web-theme-03/src/scss/variables';
+
+.multiselect-container {
+  background-color: $input-bg;
+
+  .search-wrapper {
+    border: $input-border-width solid $input-border-color;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .chip {
+    background-color: $pm-green;
+    margin: 0.25rem;
+  }
+
+  /* justification: the .searchBox class is a built-in class as part of the multiselect-react-dropdown component */
+  /* stylelint-disable-next-line selector-class-pattern */
+  .searchBox {
+    cursor: pointer;
+    margin: 0;
+  }
+
+  /* justification: the .disable_ms class is a built-in class as part of the multiselect-react-dropdown component */
+  /* stylelint-disable-next-line selector-class-pattern */
+  &.disable_ms {
+    opacity: 1;
+    background-color: $input-disabled-bg;
+  }
+}

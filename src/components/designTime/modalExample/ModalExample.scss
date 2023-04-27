@@ -1,0 +1,38 @@
+@use 'sass:color';
+@import '~@Company/web-theme-03/src/scss/variables';
+
+.react-modal-content-custom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  border: 1px solid $pm-orange;
+  background-color: $white;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 4px;
+  outline: none;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  min-width: 50%;
+  min-height: 50%;
+  display: flex;
+
+  .modal-content {
+    background-color: color.adjust($color: $pm-orange, $alpha: -0.85);
+  }
+
+  .modal-header,
+  .modal-footer {
+    border-color: $pm-orange;
+  }
+}
+
+.react-modal-content-custom-after-open {
+  // add properties as needed
+}
+
+.react-modal-content-custom-before-close {
+  // add properties as needed
+}

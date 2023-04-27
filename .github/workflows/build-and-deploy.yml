@@ -1,0 +1,182 @@
+name: Build and Deploy the Web Front-End
+
+on:
+  push:
+    branches:
+      - develop
+      - env/qa
+
+  pull_request:
+    branches:
+      - develop
+
+  workflow_dispatch:
+
+concurrency:
+  group: build-and-deploy-${{ github.head_ref }}
+  cancel-in-progress: true
+
+env:
+  ARTIFACT_FILE_NAME: react-app.zip # ----------------------------------- the file name of the artifact
+  ARTIFACT_NAME: react-app-artifact # ----------------------------------- the name of the artifact
+  AZURE_APP_SERVICE_PACKAGE_FOLDER: app-service-package # --------------- the folder in which to store the app service package
+  EXTRACTED_FILES_FOLDER: extracted-files # ----------------------------- the name of the folder where the artifact will be extracted
+  NODE_VERSION: 16.x # -------------------------------------------------- the version of node.js to use for the build
+
+jobs:
+  build-react-app:
+    name: Build the React App
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Base-64 Encode PAT
+        id: base-64-encode-pat
+        run: |
+          node -e "b64=Buffer.from('${{ secrets.AZURE_DEVOPS_ARTIFACTS_PAT }}').toString('base64');console.log(b64);" > auth.txt
+          echo "BASE64_ENCODED_PERSONAL_ACCESS_TOKEN=$(cat auth.txt)" >> $GITHUB_ENV
+
+      - name: Authorize NPM
+        env:
+          ARTIFACTS_NPM_ROOT: //pkgs.dev.azure.com/Companycode/_packaging/CompanyVsts/npm
+          EMAIL_ADDRESS: required-but-not-used@example.com
+          USER_NAME: Companycode
+        run: |
+          echo "${{ env.ARTIFACTS_NPM_ROOT }}/registry/:username=${{ env.USER_NAME }}"                             >> .npmrc
+          echo "${{ env.ARTIFACTS_NPM_ROOT }}/registry/:_password=${{ env.BASE64_ENCODED_PERSONAL_ACCESS_TOKEN }}" >> .npmrc
+          echo "${{ env.ARTIFACTS_NPM_ROOT }}/registry/:email=${{ env.EMAIL_ADDRESS }}"                            >> .npmrc
+          echo "${{ env.ARTIFACTS_NPM_ROOT }}/:username=${{ env.USER_NAME }}"                                      >> .npmrc
+          echo "${{ env.ARTIFACTS_NPM_ROOT }}/:_password=${{ env.BASE64_ENCODED_PERSONAL_ACCESS_TOKEN }}"          >> .npmrc
+          echo "${{ env.ARTIFACTS_NPM_ROOT }}/:email=${{ env.EMAIL_ADDRESS}}"                                      >> .npmrc
+          echo "@fortawesome:registry=https://npm.fontawesome.com/"                                                >> .npmrc
+          echo "//npm.fontawesome.com/:_authToken=${{ secrets.FONT_AWESOME_PKG_MGR_TOKEN }}"                       >> .npmrc
+
+      - name: Cache Node Modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build (develop)
+        if: startsWith(github.ref, 'refs/heads/env/') == false
+        run: npm run build:dev
+
+      - name: Build (qa)
+        if: github.ref == 'refs/heads/env/qa'
+        run: npm run build:qa
+
+      - name: Build (stage)
+        if: github.ref == 'refs/heads/env/stage'
+        run: npm run build:stage
+
+      - name: Build (prod)
+        if: github.ref == 'refs/heads/env/prod'
+        run: npm run build:prod
+
+      - name: Zip Build Artifacts
+        run: |
+          cd ./build
+          mkdir -p ../output
+          zip --recurse-paths ../output/${{ env.ARTIFACT_FILE_NAME }} .
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ./output/${{ env.ARTIFACT_FILE_NAME }}
+          if-no-files-found: error
+
+  deploy-to-development:
+    name: Deploy the React App to development
+    if: github.ref == 'refs/heads/develop'
+    runs-on: [self-hosted, windows, x64]
+    needs: build-react-app
+    environment: development
+    env:
+      AZURE_APP_SERVICE_NAME: azapp-newfe-dev-centralus-01 # ------------------------------------------------ the name of the app service for the web front-end
+      AZURE_KEY_VAULT_NAME: kv-new-dev-02 # ----------------------------------------------------------------- the name of the key vault from which to fetch secrets
+      AZURE_KEY_VAULT_SECRET_NAME__PUBLISH_PROFILE: publish-profile--at--azapp-newfe-dev-centralus-01 # ----- the name of the secret for the publish profile
+      # ------------------------------------- NOTE: this value ^^^^ must be ALSO manually specified in step "Deploy to Azure app service > publish-profile" since this value becomes an output property name and a variable cannot be used in the step name
+      # ------------------------------------- e.g. steps.fetch-publish-profile.outputs.publish-profile--at--azapp-newfe-dev-centralus-01
+    steps:
+      - name: Download Published Web App
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.AZURE_APP_SERVICE_PACKAGE_FOLDER }}
+
+      - name: Unzip Build Artifact
+        run: |
+          cd ${{ env.AZURE_APP_SERVICE_PACKAGE_FOLDER }}
+          Expand-Archive -Force -Path ${{ env.ARTIFACT_FILE_NAME }} -DestinationPath ./${{ env.EXTRACTED_FILES_FOLDER }}
+
+      - name: Login to Azure with Identity of Hosted Runner
+        run: |
+          az login --identity
+
+      - name: Fetch Publish Profile from Azure Key Vault
+        id: fetch-publish-profile
+        uses: azure/get-keyvault-secrets@v1
+        with:
+          keyvault: ${{ env.AZURE_KEY_VAULT_NAME }}
+          secrets: ${{ env.AZURE_KEY_VAULT_SECRET_NAME__PUBLISH_PROFILE }}
+
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_APP_SERVICE_NAME }}
+          publish-profile: ${{ steps.fetch-publish-profile.outputs.publish-profile--at--azapp-newfe-dev-centralus-01 }}
+          package: ${{ env.AZURE_APP_SERVICE_PACKAGE_FOLDER }}/${{ env.EXTRACTED_FILES_FOLDER }}
+
+  deploy-to-quality-assurance:
+    name: Deploy the React App to quality-assurance
+    if: github.ref == 'refs/heads/env/qa'
+    runs-on: [self-hosted, windows, x64]
+    needs: build-react-app
+    environment: quality-assurance
+    env:
+      AZURE_APP_SERVICE_NAME: azapp-newfe-qa-centralus-01 # ------------------------------------------------ the name of the app service for the web front-end
+      AZURE_KEY_VAULT_NAME: kv-new-qa-02 # ----------------------------------------------------------------- the name of the key vault from which to fetch secrets
+      AZURE_KEY_VAULT_SECRET_NAME__PUBLISH_PROFILE: publish-profile--at--azapp-newfe-qa-centralus-01 # ----- the name of the secret for the publish profile
+      # ------------------------------------- NOTE: this value ^^^^ must be ALSO manually specified in step "Deploy to Azure app service > publish-profile" since this value becomes an output property name and a variable cannot be used in the step name
+      # ------------------------------------- e.g. steps.fetch-publish-profile.outputs.publish-profile--at--azapp-newfe-qa-centralus-01
+    steps:
+      - name: Download Published Web App
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.AZURE_APP_SERVICE_PACKAGE_FOLDER }}
+
+      - name: Unzip Build Artifact
+        run: |
+          cd ${{ env.AZURE_APP_SERVICE_PACKAGE_FOLDER }}
+          Expand-Archive -Force -Path ${{ env.ARTIFACT_FILE_NAME }} -DestinationPath ./${{ env.EXTRACTED_FILES_FOLDER }}
+
+      - name: Login to Azure with Identity of Hosted Runner
+        run: |
+          az login --identity
+
+      - name: Fetch Publish Profile from Azure Key Vault
+        id: fetch-publish-profile
+        uses: azure/get-keyvault-secrets@v1
+        with:
+          keyvault: ${{ env.AZURE_KEY_VAULT_NAME }}
+          secrets: ${{ env.AZURE_KEY_VAULT_SECRET_NAME__PUBLISH_PROFILE }}
+
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_APP_SERVICE_NAME }}
+          publish-profile: ${{ steps.fetch-publish-profile.outputs.publish-profile--at--azapp-newfe-qa-centralus-01 }}
+          package: ${{ env.AZURE_APP_SERVICE_PACKAGE_FOLDER }}/${{ env.EXTRACTED_FILES_FOLDER }}

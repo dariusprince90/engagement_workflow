@@ -1,0 +1,71 @@
+@use 'sass:color';
+@import '~@Company/web-theme-03/src/scss/variables';
+
+.react-modal-portal {
+  .modal-content {
+    border: none;
+  }
+}
+
+.react-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: color.adjust($color: $dark, $alpha: -0.35);
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+  z-index: 1000;
+}
+
+.react-modal-overlay-after-open {
+  opacity: 1;
+}
+
+.react-modal-overlay-before-close {
+  opacity: 0;
+}
+
+.react-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  border: 1px solid $dark;
+  background-color: $white;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  min-width: 450px;
+  max-height: 80%;
+  display: flex;
+
+  .modal-content {
+    background-color: $white;
+  }
+
+  .modal-header,
+  .modal-footer {
+    border-color: $dark;
+  }
+}
+
+.react-modal-content-after-open {
+  // add properties as needed
+}
+
+.react-modal-content-before-close {
+  // add properties as needed
+}
+
+.react-modal-body-open {
+  overflow: hidden;
+}
+
+.react-modal-html-open {
+  overflow: hidden;
+}

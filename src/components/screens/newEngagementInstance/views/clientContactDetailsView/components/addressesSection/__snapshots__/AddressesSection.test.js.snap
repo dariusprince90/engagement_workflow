@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddressesSection renders the ButtonContainer above the CardList within the collapsible form section 1`] = `
+<fake-collapsible-form-section
+  data-testid="collapsible-form-section"
+  title="Addresses"
+>
+  <div
+    className="container-fluid"
+  >
+    <fake-button-container
+      data-testIds="button-container"
+    />
+    <fake-card-list
+      data-testid="card-list"
+    />
+  </div>
+</fake-collapsible-form-section>
+`;

@@ -1,0 +1,63 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  min-height: 100%;
+}
+
+// **********************************************************************
+// * anchor
+
+a {
+  color: $pm-green;
+
+  &:hover {
+    color: $pm-green;
+    text-decoration: underline;
+  }
+
+  &:focus,
+  &:visited {
+    text-decoration: none;
+  }
+}
+
+// **********************************************************************
+// * scrollbar
+
+// by default a scrollbar will be unobtrusive and appear slightly dim
+::-webkit-scrollbar {
+  width: $scrollbar-width;
+  height: $scrollbar-height;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $scrollbar-track-color-default;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-thumb-color-default;
+  border-radius: $scrollbar-thumb-border-radius;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: $scrollbar-corner-color-default;
+}
+
+// when hovering over an element with a scrollbar
+// make the scrollbar stand out a little more
+:hover {
+  &::-webkit-scrollbar-track {
+    background-color: $scrollbar-track-color-hover;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $scrollbar-thumb-color-hover;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background-color: $scrollbar-corner-color-hover;
+  }
+}

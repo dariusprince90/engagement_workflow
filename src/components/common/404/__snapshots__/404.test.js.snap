@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageNotFound404 rendering renders correct layout 1`] = `
+<div
+  className="page-not-found-404-container"
+>
+  <img
+    alt="logo"
+    className="pm-logo"
+    src="/images/pm-logos/pm-logo-wide-color-small.png"
+  />
+  <h1
+    className="display-1 mb-2"
+  >
+    404
+  </h1>
+  <h2
+    className="mb-4"
+  >
+    Oops! You can’t make your mark here.
+  </h2>
+  <p>
+    We cannot find the page that you’re looking for.
+  </p>
+  <p>
+    Try the
+    <a
+      href="/"
+      onClick={[Function]}
+    >
+      home page
+    </a>
+     instead. That is a good place to start.
+  </p>
+</div>
+`;

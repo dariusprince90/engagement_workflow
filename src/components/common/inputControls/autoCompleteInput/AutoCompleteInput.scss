@@ -1,0 +1,13 @@
+.autocomplete-input {
+  position: relative;
+
+  .loading-spinner {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.6875rem;
+  }
+}
+
+.autocomplete-value {
+  display: none;
+}

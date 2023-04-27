@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Msal rendering renders components nested in oder: provider > app-insights > auth-template > fake-component 1`] = `
+<fake-msal-provider>
+  <fake-msal-app-insights>
+    <fake-msal-auth-template
+      data-interaction-type="redirect"
+    >
+      <error-component>
+        <fake-error-component />
+      </error-component>
+      <loading-component>
+        <fake-page-overly
+          data-is-app-loader={true}
+        />
+      </loading-component>
+      <fake-component>
+        This is the contents for the snapshot.
+      </fake-component>
+    </fake-msal-auth-template>
+  </fake-msal-app-insights>
+</fake-msal-provider>
+`;

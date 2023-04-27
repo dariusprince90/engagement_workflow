@@ -1,0 +1,59 @@
+@use 'sass:color';
+@import '~@Company/web-theme-03/src/scss/variables';
+
+:root {
+  // ************************************************************
+  // colors
+  // ************************************************************
+  --toastify-color-light: #{$white};
+  --toastify-color-dark: #{$dark};
+  --toastify-color-info: #3498db;
+  --toastify-color-success: #07bc0c;
+  --toastify-color-warning: #f1c40f;
+  --toastify-color-error: #e74c3c;
+  --toastify-color-transparent: #{color.adjust($color: $white, $alpha: -0.3)};
+
+  // ************************************************************
+  // icon color
+  // ************************************************************
+  --toastify-icon-color-info: var(--toastify-color-info);
+  --toastify-icon-color-success: var(--toastify-color-success);
+  --toastify-icon-color-warning: var(--toastify-color-warning);
+  --toastify-icon-color-error: var(--toastify-color-error);
+
+  // ************************************************************
+  // misc
+  // ************************************************************
+  --toastify-toast-width: 400px;
+  --toastify-toast-background: #{$white};
+  --toastify-toast-min-height: 64px;
+  --toastify-toast-max-height: 800px;
+  --toastify-font-family: sans-serif;
+  --toastify-z-index: 9999;
+
+  // ************************************************************
+  // text color
+  // ************************************************************
+  --toastify-text-color-light: #757575;
+  --toastify-text-color-dark: #{$white};
+  --toastify-text-color-info: #{$white};
+  --toastify-text-color-success: #{$white};
+  --toastify-text-color-warning: #{$white};
+  --toastify-text-color-error: #{$white};
+
+  // ************************************************************
+  // spinner color
+  // ************************************************************
+  --toastify-spinner-color: #616161;
+  --toastify-spinner-color-empty-area: #e0e0e0;
+
+  // ************************************************************
+  // progress color
+  // ************************************************************
+  --toastify-color-progress-light: linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
+  --toastify-color-progress-dark: #bb86fc;
+  --toastify-color-progress-info: var(--toastify-color-info);
+  --toastify-color-progress-success: var(--toastify-color-success);
+  --toastify-color-progress-warning: var(--toastify-color-warning);
+  --toastify-color-progress-error: var(--toastify-color-error);
+}

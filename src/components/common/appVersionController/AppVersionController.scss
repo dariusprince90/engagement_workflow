@@ -1,0 +1,13 @@
+@import '~@Company/web-theme-03/src/scss/variables';
+@import '../../../scss/variables';
+
+.new-app-version-notification {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  padding: 0.5rem;
+  z-index: $overlay-z-index;
+  color: $white;
+  border: 1px solid $dark;
+  background-color: $dark;
+}

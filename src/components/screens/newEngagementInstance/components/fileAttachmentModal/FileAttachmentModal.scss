@@ -1,0 +1,40 @@
+@import '~@Company/web-theme-03/src/scss/variables';
+
+.nei-file-attachment-modal {
+  border: 1px solid $pm-blue;
+  background-color: transparent;
+
+  .modal-content {
+    border: none;
+    background-color: transparent;
+  }
+
+  .modal-header {
+    background-color: $pm-blue;
+    border: none;
+    color: $white;
+
+    .close {
+      color: $white;
+      text-shadow: none;
+      opacity: 0.75;
+    }
+  }
+
+  .modal-body {
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    row-gap: 0.5rem;
+  }
+
+  .modal-footer {
+    background-color: $white;
+    padding: 0.25rem;
+
+    .btn {
+      margin-left: 0.5rem;
+    }
+  }
+}

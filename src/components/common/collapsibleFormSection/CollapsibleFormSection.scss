@@ -1,0 +1,46 @@
+@import '~@Company/web-theme-03/src/scss/variables';
+@import '../../../scss/variables';
+
+.collapsible-form-section {
+  background-color: $pm-blue-050;
+  margin-bottom: 2.5rem;
+
+  .section-header {
+    cursor: pointer;
+    background-color: $secondary;
+    color: $white;
+    padding: 0.25rem 0.5rem;
+
+    // flex-container
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 0.25rem;
+
+    .title {
+      font-weight: 500;
+
+      // flex-item
+      flex-grow: 1;
+    }
+  }
+
+  .section-body {
+    border: 1px solid $black;
+    border-top: none;
+    padding: 0.5rem 0;
+
+    &.collapsed {
+      padding: 0;
+      line-height: 0;
+    }
+
+    .collapsed-content {
+      cursor: pointer;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+  }
+}

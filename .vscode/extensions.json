@@ -1,0 +1,22 @@
+{
+  // * Workspace recommended extensions
+  // * Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+  // ` https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions
+
+  // * List of extensions which should be recommended for users of this workspace.
+  "recommendations": [
+    "aaron-bond.better-comments", // * Better Comments
+    "asvetliakov.snapshot-tools", // * snapshot-tools
+    "davidanson.vscode-markdownlint", // * markdownlint
+    "dbaeumer.vscode-eslint", // * ESLint
+    "editorconfig.editorconfig", // * EditorConfig for VS Code
+    "esbenp.prettier-vscode", // * Prettier - Code Formatter
+    "orta.vscode-jest", // * Jest
+    "streetsidesoftware.code-spell-checker", // * Code Spell Checker
+    "stylelint.vscode-stylelint", // * stylelint
+    "yzhang.markdown-all-in-one" // * Markdown All in One
+  ],
+
+  // * List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+  "unwantedRecommendations": []
+}

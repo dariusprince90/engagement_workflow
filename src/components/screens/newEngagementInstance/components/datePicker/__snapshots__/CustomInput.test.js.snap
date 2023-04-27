@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomInput renders a proper input group with a calendar icon appended to the input 1`] = `
+<div
+  className="input-group"
+>
+  <input
+    onClick={[MockFunction]}
+  />
+  <div
+    className="input-group-append"
+  >
+    <span
+      className="input-group-text icon-clickable"
+      onClick={[MockFunction]}
+    >
+      <fake-font-awesome-icon
+        data-testid="font-awesome-icon"
+        icon="fa-solid fa-calendar-days"
+      />
+    </span>
+  </div>
+</div>
+`;

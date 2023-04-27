@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressAlert sets the alert-, border-, and progress bar bg- classes to info when the alertType is info 1`] = `
+<div
+  className="alert alert-info border border-info"
+>
+  <h5>
+    fixed-message
+  </h5>
+  <div
+    className="progress rounded border border-info"
+  >
+    <div
+      className="progress-bar progress-bar-striped progress-bar-animated bg-info"
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`ProgressAlert sets the alert-, border-, and progress bar bg- classes to warning when the alertType is warning 1`] = `
+<div
+  className="alert alert-warning border border-warning"
+>
+  <h5>
+    fixed-message
+  </h5>
+  <div
+    className="progress rounded border border-warning"
+  >
+    <div
+      className="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    />
+  </div>
+</div>
+`;

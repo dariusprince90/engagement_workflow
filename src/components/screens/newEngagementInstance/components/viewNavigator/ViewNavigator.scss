@@ -1,0 +1,72 @@
+@import '~@Company/web-theme-03/src/scss/variables';
+
+.view-navigator {
+  margin-bottom: 1rem;
+  overflow-x: auto;
+  position: relative;
+
+  .nav-items-container {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+
+    .clickable {
+      cursor: pointer;
+    }
+  }
+
+  .nav-item {
+    position: relative;
+    flex-grow: 1;
+    text-align: center;
+    min-width: 120px;
+    max-width: 300px;
+
+    .nav-icon {
+      color: $pm-yellow;
+      font-size: 2.25rem;
+      display: flex;
+    }
+
+    .nav-icon::before,
+    .nav-icon::after {
+      content: '';
+      flex-grow: 1;
+      flex-shrink: 1;
+      border-bottom: 5px solid $gray-500;
+      margin: auto;
+    }
+
+    &:first-child {
+      .nav-icon::before {
+        border: none;
+      }
+    }
+
+    &:last-child {
+      .nav-icon::after {
+        border: none;
+      }
+    }
+
+    &.nav-item-valid {
+      .nav-icon {
+        color: $success;
+      }
+    }
+
+    &.nav-item-invalid {
+      color: $danger;
+
+      .nav-icon {
+        color: $danger;
+      }
+    }
+
+    .nav-label {
+      padding: 0 0.5rem;
+      font-weight: 500;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+@import '~@Company/web-theme-03/src/scss/variables';
+
+.design-time-overlay {
+  // flex container properties
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  // position and size
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3rem;
+
+  // additional properties
+  background-color: $dark;
+}

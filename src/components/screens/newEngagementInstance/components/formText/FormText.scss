@@ -1,0 +1,11 @@
+.form-text {
+  margin: 0 0 1rem;
+
+  &.emphasis {
+    font-style: italic;
+  }
+
+  &.label {
+    font-weight: 500;
+  }
+}

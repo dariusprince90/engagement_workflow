@@ -1,0 +1,110 @@
+@use 'sass:color';
+@import '~@Company/web-theme-03/src/scss/variables';
+@import '../../../scss/variables';
+
+.side-bar {
+  $side-bar-min-width: 64px;
+  $side-bar-max-width: 270px;
+  $transition-duration: 200ms;
+
+  height: 100%;
+  width: $side-bar-min-width;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition-duration: $transition-duration;
+  background-color: $pm-blue-100;
+  border-right: 1px solid $pm-blue-500;
+  box-shadow: 3px 0 10px $pm-blue-200;
+
+  // flex container properties
+  display: flex;
+  flex-direction: column;
+
+  // scrollbar track on the side-bar blends in with the side-bar
+  &::-webkit-scrollbar-track {
+    background-color: $pm-blue-100;
+  }
+
+  // scrollbar track stands out more when hovering over the side-bar
+  &:hover {
+    &::-webkit-scrollbar-track {
+      background-color: $pm-blue-200;
+    }
+  }
+
+  &.collapsed {
+    // narrow scrollbar width when the side-bar is collapsed
+    &::-webkit-scrollbar {
+      width: calc($scrollbar-width / 2);
+    }
+  }
+
+  &.expanded {
+    width: $side-bar-max-width;
+    transition-duration: $transition-duration;
+
+    // standard scrollbar width when the side-bar is expanded
+    &::-webkit-scrollbar {
+      width: $scrollbar-width;
+    }
+  }
+
+  .menu-item {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    color: $gray-900;
+
+    // flex item properties
+    flex-grow: 0;
+
+    // flex container properties
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    // each menu-item that is not .filler
+    // should have the pointer cursor
+    &:not(.filler) {
+      cursor: pointer;
+    }
+
+    &.filler {
+      flex-grow: 1;
+    }
+
+    &:hover {
+      text-decoration: none;
+
+      // only set the background color for menu-item(s) on hover
+      // that are not .filler and not .active and not .expander
+      &:not(.filler):not(.active):not(.expander) {
+        background-color: color.adjust($color: $gray-350, $lightness: 10%);
+      }
+    }
+
+    &.active {
+      background-color: color.adjust($color: $pm-blue);
+      color: $white;
+    }
+
+    .icon {
+      font-size: 1.5rem;
+      min-width: $side-bar-min-width;
+      text-align: center;
+
+      // flex item properties
+      flex-grow: 0;
+    }
+
+    .label {
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      margin-right: 0.25rem;
+
+      // flex item properties
+      flex-grow: 1;
+    }
+  }
+}

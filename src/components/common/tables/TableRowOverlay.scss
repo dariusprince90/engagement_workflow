@@ -1,0 +1,63 @@
+@import '~@Company/web-theme-03/src/scss/variables';
+
+.table-row-overlay {
+  // positioning
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+
+  // display properties
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.375rem;
+
+  // styling
+  opacity: 0.9;
+  color: $white;
+  font-weight: 500;
+
+  &.info {
+    background-color: $pm-green;
+  }
+
+  &.error {
+    background-color: $danger;
+  }
+
+  .details-message {
+    font-size: 0.675rem;
+  }
+}
+
+.table-row-error-details {
+  // positioning
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+  // display properties
+  display: none;
+  max-width: 500px;
+  padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+
+  // styling
+  background-color: $white;
+  border: 1px solid $danger;
+  color: $danger;
+  font-size: 0.875rem;
+
+  &.visible {
+    display: block;
+  }
+
+  .close-icon {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+  }
+}

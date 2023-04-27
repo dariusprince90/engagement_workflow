@@ -1,0 +1,25 @@
+// add variables that will override/extend the pm theme here
+
+@use 'sass:color';
+
+$table-hover-bg: color.adjust(
+  $color: $pm-green,
+  $alpha: -0.85
+);
+
+// forms
+$input-color: $gray-700;
+$input-disabled-bg: $gray-300;
+
+// input groups
+$input-group-addon-bg: $gray-100;
+
+// custom-select
+$custom-select-disabled-bg: $input-disabled-bg;
+$custom-select-disabled-color: $input-color;
+
+.custom-select {
+  &:disabled {
+    opacity: 1;
+  }
+}

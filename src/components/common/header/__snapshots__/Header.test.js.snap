@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders correctly and matches snapshot 1`] = `
+<header
+  className="common-page-header"
+>
+  <a
+    href="/"
+  >
+    <img
+      alt="Company logo"
+      className="pm-logo"
+      src="/images/pm-logos/pm-logo-white-small.png"
+    />
+  </a>
+  <span
+    className="titles-container"
+  >
+    <h3
+      className="page-title"
+    >
+      page title for snapshot tests
+    </h3>
+    <h5
+      className="page-subtitle"
+    >
+      page subtitle for snapshot tests
+    </h5>
+  </span>
+  <div
+    className="page-help-container"
+  >
+    <a
+      href="https://Company.sharepoint.com/sites/kshare-Internal-Accounting/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fkshare%2DInternal%2DAccounting%2FShared%20Documents%2FNEW%20Best%20Practices%20and%20Frequently%20Asked%20Questions%2Epdf&parent=%2Fsites%2Fkshare%2DInternal%2DAccounting%2FShared%20Documents"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <fake-font-awesome-icon
+        className="help-logo"
+        data-testid="font-awesome-icon"
+        icon={
+          Array [
+            "fas",
+            "question-circle",
+          ]
+        }
+      />
+      <span
+        className="page-help-text"
+      >
+        Best Practices and FAQs
+      </span>
+    </a>
+  </div>
+</header>
+`;

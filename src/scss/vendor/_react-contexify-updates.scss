@@ -1,0 +1,6 @@
+.react-contexify {
+  & &__submenu {
+    transition: opacity 275ms;
+    transition-delay: 150ms;
+  }
+}

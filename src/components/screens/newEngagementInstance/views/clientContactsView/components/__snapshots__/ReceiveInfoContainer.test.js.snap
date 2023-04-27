@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReceiveInfoContainer renders the "Receive Customer Invoice" icon with the "fa-solid fa-check" icon and "text-success" className when receiveCustomerInvoice is true 1`] = `
+<div
+  className="receive-info-container"
+>
+  <div
+    className="receive-info-item"
+  >
+    <div>
+      Receive Customer Invoice
+    </div>
+    <fake-font-awesome-icon
+      className="text-success"
+      data-testid="font-awesome-icon"
+      fixedWidth={true}
+      icon="fa-solid fa-check"
+      size="lg"
+    />
+  </div>
+  <div
+    className="receive-info-item"
+  >
+    <div>
+      Receive Customer Statement
+    </div>
+    <fake-font-awesome-icon
+      className="text-danger"
+      data-testid="font-awesome-icon"
+      fixedWidth={true}
+      icon="fa-solid fa-xmark"
+      size="lg"
+    />
+  </div>
+</div>
+`;
+
+exports[`ReceiveInfoContainer renders the "Receive Customer Invoice" icon with the "fa-solid fa-xmark" icon and "text-danger" className when receiveCustomerInvoice is false 1`] = `
+<div
+  className="receive-info-container"
+>
+  <div
+    className="receive-info-item"
+  >
+    <div>
+      Receive Customer Invoice
+    </div>
+    <fake-font-awesome-icon
+      className="text-danger"
+      data-testid="font-awesome-icon"
+      fixedWidth={true}
+      icon="fa-solid fa-xmark"
+      size="lg"
+    />
+  </div>
+  <div
+    className="receive-info-item"
+  >
+    <div>
+      Receive Customer Statement
+    </div>
+    <fake-font-awesome-icon
+      className="text-danger"
+      data-testid="font-awesome-icon"
+      fixedWidth={true}
+      icon="fa-solid fa-xmark"
+      size="lg"
+    />
+  </div>
+</div>
+`;
+
+exports[`ReceiveInfoContainer renders the "Receive Customer Statement" icon with the "fa-solid fa-check" icon and "text-success" className when receiveCustomerStatement is true 1`] = `
+<div
+  className="receive-info-container"
+>
+  <div
+    className="receive-info-item"
+  >
+    <div>
+      Receive Customer Invoice
+    </div>
+    <fake-font-awesome-icon
+      className="text-danger"
+      data-testid="font-awesome-icon"
+      fixedWidth={true}
+      icon="fa-solid fa-xmark"
+      size="lg"
+    />
+  </div>
+  <div
+    className="receive-info-item"
+  >
+    <div>
+      Receive Customer Statement
+    </div>
+    <fake-font-awesome-icon
+      className="text-success"
+      data-testid="font-awesome-icon"
+      fixedWidth={true}
+      icon="fa-solid fa-check"
+      size="lg"
+    />
+  </div>
+</div>
+`;
+
+exports[`ReceiveInfoContainer renders the "Receive Customer Statement" icon with the "fa-solid fa-xmark" icon and "text-danger" className when receiveCustomerStatement is false 1`] = `
+<div
+  className="receive-info-container"
+>
+  <div
+    className="receive-info-item"
+  >
+    <div>
+      Receive Customer Invoice
+    </div>
+    <fake-font-awesome-icon
+      className="text-danger"
+      data-testid="font-awesome-icon"
+      fixedWidth={true}
+      icon="fa-solid fa-xmark"
+      size="lg"
+    />
+  </div>
+  <div
+    className="receive-info-item"
+  >
+    <div>
+      Receive Customer Statement
+    </div>
+    <fake-font-awesome-icon
+      className="text-danger"
+      data-testid="font-awesome-icon"
+      fixedWidth={true}
+      icon="fa-solid fa-xmark"
+      size="lg"
+    />
+  </div>
+</div>
+`;

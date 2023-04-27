@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppLayout renders the correct layout 1`] = `
+<div
+  className="app-layout"
+>
+  <div
+    className="header-container"
+  >
+    <fake-header
+      data-testid="header"
+    />
+  </div>
+  <div
+    className="body-container"
+  >
+    <div
+      className="app-content-container"
+    >
+      <fake-app-content
+        data-testid="app-content"
+      />
+    </div>
+  </div>
+</div>
+`;

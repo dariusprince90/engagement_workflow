@@ -1,0 +1,18 @@
+// pm theme pre-req
+@import '~@Company/web-theme-03/src/scss/variables';
+@import '~@Company/web-theme-03/src/scss/mixins';
+
+// app variables & theme overrides
+@import 'pm-theme-overrides';
+
+// pm theme files
+@import '~bootstrap/scss/bootstrap';
+@import '~@Company/web-theme-03/src/scss/variables-extended';
+@import '~@Company/web-theme-03/src/scss/base';
+@import '~@Company/web-theme-03/src/scss/forms';
+@import '~@Company/web-theme-03/src/scss/buttons';
+
+// app styles
+@import 'variables';
+@import './vendor/vendor';
+@import 'root';

@@ -1,0 +1,313 @@
+@use 'sass:color';
+@import '~@Company/web-theme-03/src/scss/variables';
+@import '../../../scss/variables';
+
+.new-engagement-instance-screen {
+  height: 100%;
+
+  .screen-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: color.adjust($color: $black, $alpha: -0.5);
+    z-index: $overlay-z-index;
+
+    // flex container properties
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  // **********************************************************************
+  // * forms
+
+  form {
+    height: 100%;
+
+    // flex container properties
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group > label ul,
+  .form-group > label ol {
+    margin-bottom: 0;
+  }
+
+  .form-group .dynamic-alert {
+    margin-top: 0.5rem;
+  }
+
+  // **********************************************************************
+  // * tables
+
+  @mixin bordered-table {
+    tbody tr td {
+      border: 1px solid $secondary;
+    }
+  }
+
+  .table {
+    background-color: $white;
+    border: 1px solid $secondary;
+
+    thead tr th {
+      border: 1px solid $secondary;
+      background-color: $secondary;
+      color: $white;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    tbody tr td {
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .add-icon {
+      color: $pm-blue-050;
+      cursor: pointer;
+    }
+
+    .delete-icon {
+      color: $danger;
+      cursor: pointer;
+    }
+  }
+
+  // **********************************************************************
+  // * containers
+
+  .view-container {
+    padding: 1rem 0;
+    overflow-y: auto;
+
+    // flex item properties
+    flex-grow: 1;
+  }
+
+  .buttons-container {
+    background-color: $white;
+    border-top: 1px solid $pm-blue;
+    padding: 0.5rem 1rem;
+
+    // flex item properties
+    flex-grow: 0;
+
+    // flex container properties
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    row-gap: 0.5rem;
+    column-gap: 0.5rem;
+    align-items: center;
+
+    #go-to-top-button {
+      margin-right: auto;
+    }
+  }
+
+  // **********************************************************************
+  // * misc
+
+  .icon-clickable {
+    cursor: pointer;
+  }
+
+  // **********************************************************************
+  // * components
+
+  .phone-number-control {
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 0.5rem;
+    row-gap: 0.5rem;
+    justify-content: flex-start;
+    align-items: center;
+
+    > div {
+      flex-grow: 1;
+      min-width: 225px;
+
+      &:last-of-type {
+        flex-grow: 0;
+        min-width: auto;
+      }
+    }
+  }
+
+  #attachments-table {
+    thead {
+      tr th:last-child {
+        text-align: center;
+        width: 1rem;
+      }
+    }
+
+    tbody {
+      background-color: $white;
+
+      tr td:last-child {
+        text-align: center;
+        width: 1rem;
+      }
+    }
+  }
+
+  // **********************************************************************
+  // * views
+
+  #billing-schedule-summary-view {
+    .billing-schedule-table {
+      @include bordered-table;
+
+      tbody tr td {
+        &:nth-child(5) > * {
+          display: flex;
+          flex-direction: column;
+          row-gap: 0.25rem;
+        }
+
+        .job-info-response-schedule-item {
+          font-weight: bold;
+          font-style: italic;
+        }
+      }
+    }
+  }
+
+  #client-contact-details-view,
+  #client-contacts-view {
+    .button-container {
+      margin-bottom: 0.5rem;
+    }
+
+    .card-list {
+      // flex container properties
+      display: flex;
+      flex-flow: row wrap;
+      column-gap: 1rem;
+      row-gap: 1rem;
+    }
+
+    .card {
+      min-width: 300px;
+    }
+
+    .card-header {
+      padding: 0.75rem;
+
+      // flex container properties
+      display: flex;
+      flex-flow: row nowrap;
+      column-gap: 0.5rem;
+      align-items: center;
+
+      div:first-child {
+        flex-grow: 1;
+      }
+    }
+
+    .card-footer {
+      padding: 0.75rem;
+
+      // flex container properties
+      display: flex;
+      flex-flow: row nowrap;
+      column-gap: 0.5rem;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .card-body {
+      // flex container properties
+      display: flex;
+      flex-flow: column nowrap;
+      row-gap: 0.75rem;
+      justify-content: flex-end;
+
+      h5,
+      h6 {
+        margin: 0;
+      }
+
+      .receive-info-container {
+        margin-top: auto;
+
+        .receive-info-item {
+          // flex container properties
+          display: flex;
+          flex-flow: row nowrap;
+          column-gap: 0.25rem;
+          align-items: center;
+
+          div {
+            min-width: 195px;
+          }
+        }
+      }
+    }
+  }
+
+  #job-setup-view {
+    .add-job-roles-container {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      align-items: flex-end;
+      column-gap: 1rem;
+
+      .form-group {
+        flex-grow: 1;
+        flex-basis: 350px;
+      }
+
+      .btn {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .billing-schedule-table {
+      @include bordered-table;
+
+      tbody tr:not(.create-new-billing-schedule-table-row):not([data-message-row]) {
+        &.selectable-row {
+          cursor: pointer;
+        }
+
+        td.current-job {
+          font-weight: bold;
+          font-style: italic;
+        }
+
+        td:last-child > * {
+          display: flex;
+          flex-direction: column;
+          row-gap: 0.25rem;
+        }
+      }
+    }
+
+    .job-roles-table {
+      tbody {
+        tr td:last-child {
+          text-align: center;
+          width: 1rem;
+        }
+      }
+    }
+  }
+
+  #natures-of-service-view {
+    .natures-of-service-table {
+      tbody {
+        tr td:last-child {
+          text-align: center;
+          width: 1rem;
+        }
+      }
+    }
+  }
+}

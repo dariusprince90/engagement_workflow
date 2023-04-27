@@ -1,0 +1,16 @@
+@import '~@Company/web-theme-03/src/scss/variables';
+@import '../../../scss/variables';
+
+.page-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $white;
+  z-index: $overlay-z-index;
+
+  &.transparent {
+    background-color: transparent;
+  }
+}

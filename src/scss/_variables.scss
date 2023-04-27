@@ -1,0 +1,39 @@
+// add variables specific to this app in here
+
+// colors
+$pm-blue-700: #647b8b;
+$pm-blue-600: #778b9a;
+$pm-blue-500: #8b9ca8;
+$pm-blue-400: #9eacb7;
+$pm-blue-300: #b2bdc5;
+$pm-blue-200: #c5cdd4;
+$pm-blue-100: #d8dee2;
+$pm-blue-050: #eceef1;
+
+// typography
+$font-family-sans-serif-001: lato, sans-serif;
+
+// overlays
+$overlay-z-index: 50;
+
+// alerts
+@keyframes alert-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+// scroll bars
+$scrollbar-width: 0.75rem;
+$scrollbar-height: 0.75rem;
+$scrollbar-track-color-default: $pm-blue-050;
+$scrollbar-track-color-hover: $pm-blue-100;
+$scrollbar-thumb-color-default: $pm-blue-200;
+$scrollbar-thumb-color-hover: $pm-blue-500;
+$scrollbar-thumb-border-radius: 8px;
+$scrollbar-corner-color-default: $pm-blue-200;
+$scrollbar-corner-color-hover: $pm-blue-700;

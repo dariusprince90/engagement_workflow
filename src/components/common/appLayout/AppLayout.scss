@@ -1,0 +1,37 @@
+.app-layout {
+  height: 100vh;
+
+  // flex container properties
+  display: flex;
+  flex-direction: column;
+
+  .header-container {
+    // flex item properties
+    flex-grow: 0;
+  }
+
+  .body-container {
+    overflow: hidden;
+
+    // flex item properties
+    flex-grow: 1;
+
+    // flex container properties
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+
+    .nav-container {
+      // flex item properties
+      flex-grow: 0;
+    }
+
+    .app-content-container {
+      overflow: auto;
+
+      // flex item properties
+      flex-grow: 1;
+    }
+  }
+}
